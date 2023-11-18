@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from '../product';
+import { IProduct } from '../product';
 import { HttpService } from '../../http.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [HttpService]
 })
 export class ProductsListComponent {
-  products: Product[] | undefined;
+  products: IProduct[] | undefined;
 
   constructor(private httpService: HttpService) { }
 
