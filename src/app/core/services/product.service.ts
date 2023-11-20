@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduct } from './products/product';
+import { IProduct } from '../models/product.model';
 import { Observable } from 'rxjs';
 
-const url = 'https://fakestoreapi.com/products';
+const API_URL: string = 'https://fakestoreapi.com/products';
 @Injectable()
-export class HttpService {
+export class ProductService {
 
   constructor(private http: HttpClient) { }
 
   getData(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(url);
+    return this.http.get<IProduct[]>(API_URL);
   }
 }

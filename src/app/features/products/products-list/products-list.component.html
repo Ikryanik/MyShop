@@ -1,0 +1,14 @@
+<ul>
+    @for(product of products | async; track product.id){
+    <div>
+        <img [src]="product.image" height="90" />
+        <p [textContent]="product.title"></p>
+        <p [textContent]="product.category"></p>
+        <p [textContent]="product.description"></p>
+        <p [textContent]="product.rating.rate"></p>
+        <p [textContent]="product.rating.count"></p>
+        <p [textContent]="product.price | currency:'RUB':'symbol-narrow'"></p>
+        _____________________________________
+    </div>
+    }
+</ul>

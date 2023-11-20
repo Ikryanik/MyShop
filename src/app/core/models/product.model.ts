@@ -1,4 +1,4 @@
-import { Rating } from "./rating";
+import { Rating } from "./rating.model";
 
 export interface IProduct {
   id: number;
@@ -8,4 +8,4 @@ export interface IProduct {
   category: string;
   image: string;
   rating: Rating;
-   }
+}
