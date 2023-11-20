@@ -13,8 +13,9 @@ export class ProductsListComponent implements OnInit {
   products: Observable<IProduct[]> | undefined;
 
   constructor(private httpService: ProductService) { }
-
+  
   ngOnInit(): void {
-    this.products = this.httpService.getData();
+    this.products = this.httpService.getProductList();
+    this.httpService.getProductById(2);
   }
 }

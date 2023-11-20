@@ -9,7 +9,11 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<IProduct[]> {
+  getProductList(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(API_URL);
+  }
+
+  getProductById(id: number): Observable<IProduct | undefined> {
+    return this.http.get<IProduct | undefined>(API_URL + `/${id}`);
   }
 }
