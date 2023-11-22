@@ -1,15 +1,15 @@
-<div ng [hidden]="isHidden">
-    <img [src]="product?.image" height="90" />
-    <p [textContent]="product?.title"></p>
-    <p [textContent]="product?.category"></p>
-    <p [textContent]="product?.description"></p>
-    <p [textContent]="product?.rating?.rate"></p>
-    <p [textContent]="product?.rating?.count"></p>
-    <p [textContent]="product?.price | currency:'RUB':'symbol-narrow'"></p>
-    <button>+ 
+<div *ngIf="product$ | async as product">
+    <img [src]="product.image" height="90" />
+    <p [textContent]="product.title"></p>
+    <p [textContent]="product.category"></p>
+    <p [textContent]="product.description"></p>
+    <p [textContent]="product.rating.rate"></p>
+    <p [textContent]="product.rating.count"></p>
+    <p [textContent]="product.price | currency:'RUB':'symbol-narrow'"></p>
+    <button>+
         <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"
-        height="10" />
+            height="10" />
     </button>
 </div>
-<p [hidden]="!isHidden">Товар не найден</p>
+<p *ngIf="!product$">Товар не найден</p>
 <button (click)="goBack()">Вернуться назад</button>

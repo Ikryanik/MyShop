@@ -5,17 +5,12 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './products-list.component.html',
-  styleUrl: './products-list.component.css',
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.css',
   providers: [ProductService]
 })
-export class ProductsListComponent implements OnInit {
-  products: Observable<IProduct[]> | undefined;
+export class ProductListComponent {
+  readonly products$: Observable<IProduct[]> = this.httpService.getProductList$();
 
   constructor(private httpService: ProductService) { }
-  
-  ngOnInit(): void {
-    this.products = this.httpService.getProductList();
-    this.httpService.getProductById(2);
-  }
 }

@@ -1,0 +1,13 @@
+<div *ngFor="let product of products$ | async">
+    <div class="card" routerLink='details/{{product.id}}'>
+        <div class="container">
+            <img [src]="product.image" height="90" />
+            <p>{{product.title}}</p>
+            <p>{{product.category}}</p>
+            <p>{{product.description}}</p>
+            <p>{{product.rating.rate}}</p>
+            <p>{{product.rating.count}}</p>
+            <p>{{product.price | currency:'RUB':'symbol-narrow'}}</p>
+        </div>
+    </div>
+</div>
