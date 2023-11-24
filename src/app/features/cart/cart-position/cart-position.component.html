@@ -1,0 +1,10 @@
+<div *ngIf="product">
+  <td>
+    <img [src]="product.image" height="70" />
+  </td>
+  <td>{{product.title}}</td>
+  <td>{{product.price | currency}}</td>
+  <td>
+    <button (click)="deleteProduct()">Удалить</button>
+  </td>
+</div>
