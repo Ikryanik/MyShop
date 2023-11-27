@@ -10,7 +10,7 @@ import { CartService } from '../../../core/services/cart.service';
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
-  providers: [ProductService, CartService]
+  providers: [ProductService]
 })
 export class ProductDetailsComponent {
   product$: Observable<IProduct> = this.route.params.pipe(

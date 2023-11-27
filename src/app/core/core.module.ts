@@ -8,7 +8,6 @@ import { CartService } from './services/cart.service';
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
   declarations: [HeaderComponent],
-  exports: [HeaderComponent],
-  providers: [CartService]
+  exports: [HeaderComponent]
 })
 export class CoreModule { }

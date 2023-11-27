@@ -2,15 +2,12 @@ import { Injectable } from "@angular/core";
 import { IProduct } from "../models/product.model";
 import { BehaviorSubject, Observable, of, switchMap } from "rxjs";
 
-const prs$ = new BehaviorSubject<IProduct[]>([]);
-const prI: IProduct[] = [];
-
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
-    private _productsItems: IProduct[] = prI;
-    products$ = prs$;
+    private _productsItems: IProduct[] = [];
+    products$ = new BehaviorSubject<IProduct[]>([]);
 
     public getProducts(): Observable<IProduct[]> {
         return this.products$;

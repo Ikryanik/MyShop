@@ -10,7 +10,6 @@ import { CartService } from './core/services/cart.service';
 @NgModule({
   imports: [BrowserModule, FormsModule, CommonModule, CoreModule, AppRoutingModule],
   declarations: [AppComponent],
-  bootstrap: [AppComponent],
-  providers: [CartService]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

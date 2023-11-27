@@ -11,7 +11,6 @@ import { CartService } from '../../core/services/cart.service';
     CommonModule, HttpClientModule, CartRoutingModule
   ],
   declarations: [CartListComponent, CartPositionComponent],
-  bootstrap: [CartListComponent],
-  providers: [CartService]
+  bootstrap: [CartListComponent]
 })
 export class CartModule { }
