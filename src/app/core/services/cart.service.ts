@@ -6,7 +6,6 @@ import { BehaviorSubject, Observable, of, switchMap } from "rxjs";
     providedIn: 'root'
 })
 export class CartService {
-    private _productsItems: IProduct[] = [];
     products$ = new BehaviorSubject<IProduct[]>([]);
 
     public getProducts(): Observable<IProduct[]> {
@@ -23,17 +22,20 @@ export class CartService {
     }
 
     addToCart(product: IProduct): void {
-        this._productsItems.push(product);
-        this.products$.next(this._productsItems);
+        const newProductList = this.products$.getValue();
+        newProductList.push(product);
+        this.products$.next(newProductList);
     }
 
     removeFromCart(index: number): void {
-        this._productsItems.splice(index, 1);
-        this.products$.next(this._productsItems);
+        const newProductList = this.products$.getValue()
+        newProductList.splice(index, 1);
+        this.products$.next(newProductList);
     }
 
     clearCart(): void {
-        this._productsItems.splice(0, this._productsItems.length);
-        this.products$.next(this._productsItems);
+        const newProductList = this.products$.getValue();
+        newProductList.splice(0, newProductList.length);
+        this.products$.next(newProductList);
     }
 }
