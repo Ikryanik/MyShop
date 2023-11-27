@@ -12,6 +12,14 @@ export class CartService {
         return this.products$;
     }
 
+    private getProductListItems(): IProduct[] {
+        return this.products$.getValue();
+    }
+
+    private notifyCartSubscribers(newProductList: IProduct[]): void {
+        this.products$.next(newProductList);
+    }
+
     getTotalSum(): Observable<number> {
         return this.products$.pipe(switchMap(async items => {
             if (items.length == 0) return 0;
@@ -22,20 +30,20 @@ export class CartService {
     }
 
     addToCart(product: IProduct): void {
-        const newProductList = this.products$.getValue();
+        const newProductList = this.getProductListItems();
         newProductList.push(product);
-        this.products$.next(newProductList);
+        this.notifyCartSubscribers(newProductList);
     }
 
     removeFromCart(index: number): void {
-        const newProductList = this.products$.getValue()
+        const newProductList = this.getProductListItems();
         newProductList.splice(index, 1);
-        this.products$.next(newProductList);
+        this.notifyCartSubscribers(newProductList);
     }
 
     clearCart(): void {
-        const newProductList = this.products$.getValue();
+        const newProductList = this.getProductListItems();
         newProductList.splice(0, newProductList.length);
-        this.products$.next(newProductList);
+        this.notifyCartSubscribers(newProductList);
     }
 }
