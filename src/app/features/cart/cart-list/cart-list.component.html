@@ -1,0 +1,13 @@
+<h1>Корзина</h1>
+<button (click)="goBack()">←</button>
+<div *ngIf="products$">
+  <table>
+    <tr *ngFor="let position of products$ | async; index as i">
+      <app-cart-position [product]="position" [index]=i (deleteItemEvent)="deleteProduct($event)"></app-cart-position>
+    </tr>
+  </table>
+</div>
+<div>
+  <p><strong>Общая сумма: </strong>{{totalSum$ | async | currency}}</p>
+  <button *ngIf="products$" (click)="clearCart()">Очистить корзину</button>
+</div>
