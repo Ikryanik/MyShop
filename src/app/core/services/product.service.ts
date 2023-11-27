@@ -15,6 +15,6 @@ export class ProductService {
   }
 
   getProductById(id: number): Observable<IProduct> {
-    return this.http.get<IProduct>(API_URL + `/${id}`, { params });
+    return this.http.get<IProduct>(API_URL + `/${id}`);
   }
 }

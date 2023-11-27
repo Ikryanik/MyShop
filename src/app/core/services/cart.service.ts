@@ -1,51 +1,42 @@
 import { Injectable } from "@angular/core";
 import { IProduct } from "../models/product.model";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, of, switchMap } from "rxjs";
 
-const state = new BehaviorSubject<IProductsState>({ count: 0, sum: 0 });
-const prs: IProduct[] = [];
-
-interface IProductsState {
-  count: number;
-  sum: number;
-}
+const prs$ = new BehaviorSubject<IProduct[]>([]);
+const prI: IProduct[] = [];
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CartService {
-  private _products: IProduct[] = prs;
-  ProductsState = state;
+    private _productsItems: IProduct[] = prI;
+    products$ = prs$;
 
-  public get products(): IProduct[] {
-    return this._products;
-  }
-
-  private set products(p: IProduct[]) {
-    this._products = p;
-    this.ProductsState.next({ count: this._products.length, sum: this.getTotalSum() });
-  }
-
-  getTotalSum(): number {
-    let sum = 0;
-    if (this._products.length > 0) {
-      sum = this._products.map(x => x.price).reduce((previousSum, currentPrice) => previousSum + currentPrice);
+    public getProducts(): Observable<IProduct[]> {
+        return this.products$;
     }
-    return sum;
-  }
 
-  addToCart(product: IProduct): void {
-    this._products.push(product);
-    this.ProductsState.next({ count: this._products.length, sum: this.getTotalSum() });
-  }
+    getTotalSum(): Observable<number> {
+        return this.products$.pipe(switchMap(async items => {
+            if (items.length == 0) return 0;
 
-  removeFromCart(index: number): void {
-    this._products.splice(index, 1);
-    this.ProductsState.next({ count: this._products.length, sum: this.getTotalSum() });
-  }
+            let result = 0;
+            return items.reduce((previousSum, currentItem) => previousSum + currentItem.price, result);
+        }));
+    }
 
-  clearCart(): void {
-    this._products.splice(0, this._products.length);
-    this.ProductsState.next({ count: 0, sum: 0 });
-  }
+    addToCart(product: IProduct): void {
+        this._productsItems.push(product);
+        this.products$.next(this._productsItems);
+    }
+
+    removeFromCart(index: number): void {
+        this._productsItems.splice(index, 1);
+        this.products$.next(this._productsItems);
+    }
+
+    clearCart(): void {
+        this._productsItems.splice(0, this._productsItems.length);
+        this.products$.next(this._productsItems);
+    }
 }
