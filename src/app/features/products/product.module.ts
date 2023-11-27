@@ -11,7 +11,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     HttpClientModule,
     ProductRoutingModule
   ],
-  declarations: [ProductListComponent, ProductDetailsComponent],
-  bootstrap: [ProductListComponent]
+  declarations: [ProductListComponent, ProductDetailsComponent]
 })
 export class ProductModule { }
